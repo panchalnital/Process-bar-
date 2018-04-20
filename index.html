@@ -1,0 +1,116 @@
+<html>
+<head>
+    <script src="jquery-1.10.2.js"></script>
+    <script src="CircularLoader-v1.3.js"></script>
+    <!--<style>
+div cir{
+    background-image: url("imageedit_1_6484547719.png");
+}
+
+</style>-->
+</head>
+<body>
+<div id="divProgress" class="cir"></div>
+<div style="display:block;">Click on checkbox for progress  Q1)</div>
+<input type="checkbox" value="1" />
+<input type="checkbox" value="3" />
+<input type="checkbox"  value="7"/>
+<input type="checkbox"  value="9"/>
+<input type="checkbox"  value="10"/>
+<input type="checkbox" value="12" />
+<input type="checkbox" value="21" />
+
+
+<div style="display:block;">Click on checkbox for progress  Q2)</div>
+
+<input type="checkbox" value="40" />
+<input type="checkbox"  value="61"/>
+<input type="checkbox"  value="79"/>
+<input type="checkbox"  value="100"/>
+
+
+<script>
+$(document).ready(function () {
+        update();
+        elements();
+        $('input').click(function () {
+            var v1 =$(this).val();
+            
+            //0-15,15-30,30-44,44-60,60-73,73-86,86-100
+            if(v1<15){
+               update(v1);
+            }else if(v1>=15 && v1<=30){
+               update(v1);
+            }else if(v1>=30 && v1<=44){
+               update(v1);
+            }else if(v1>=44 && v1<=60){
+                update(v1);
+            }else if(v1>=60 && v1<=73){
+               update(v1);
+            }else if(v1>=73 && v1<=86){
+                update(v1);
+            }else{
+                update(v1);
+            }
+           
+           // alert(v1);
+           // update(v1);
+            $('#divProgress').appendTo(elements());
+        });
+        
+        function elements(){
+                var c = document.getElementById("divProgresscanvas");
+                var ctx = c.getContext("2d");
+                ctx.beginPath();
+                ctx.lineWidth = 2;    
+                ctx.strokeStyle = '#ffffff ';
+                //1
+                ctx.moveTo(69, 0);//un
+                ctx.lineTo(69, 60);//up
+                //2
+               // ctx.moveTo(120, 30);//un
+                //ctx.lineTo(80, 58);//up
+                //3
+                ctx.moveTo(120, 55);//un
+                ctx.lineTo(80, 65);//up
+                //4
+                ctx.moveTo(120, 135);//un
+                ctx.lineTo(73, 75);//up
+                //5
+                ctx.moveTo(60, 80);//un
+                ctx.lineTo(38, 110);//up
+                //6
+               // ctx.moveTo(60, 70);//un
+               // ctx.lineTo(18, 75);//up
+                //7
+                ctx.moveTo(60, 65);//un
+                ctx.lineTo(15, 55);//up
+                ctx.stroke();
+                }
+    });
+    function update(v1) {
+
+        var numberOfChecked = $('input:checkbox:checked').length;
+        var totalCheckboxes = $('input:checkbox').length;
+
+        var numberNotChecked = totalCheckboxes - numberOfChecked;
+        //var perc = (numberOfChecked / totalCheckboxes) * 100;
+        var perc = v1;
+        $("#divProgress").circularloader({
+            
+            progressPercent: perc,
+            backgroundColor: "#ffffff",//background colour of inner circle
+            fontColor: "#000000",//font color of progress text
+            fontSize: "40px",//font size of progress text
+            radius: 34,//radius of circle
+            progressBarBackground: "#4f858e",//background colour of circular progress Bar
+            progressBarColor: "#3c6971",//colour of circular progress bar
+            progressBarWidth: 35,//progress bar width
+            speed: 5,
+            progressvalue: perc,
+            showText: false
+        });
+    }
+</script>
+</body>
+</html>
